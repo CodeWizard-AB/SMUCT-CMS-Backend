@@ -12,3 +12,23 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// ?  TESTING PURPOSES ONLY
+
+model User {
+  id    Int     @id @unique @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+  @@map("users")
+}
+
+model Post {
+  id        Int      @id @unique @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean? @default(false)
+  authorId  Int?
+  author    User?    @relation(fields: [authorId], references: [id])
+  @@map("posts")
+}
