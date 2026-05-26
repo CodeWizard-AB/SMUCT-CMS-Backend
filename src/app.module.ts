@@ -3,9 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaService } from './prisma.service';
+import { AuthModule } from '@thallesp/nestjs-better-auth';
+import { auth } from './common/lib/auth';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true })],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule.forRoot({ auth }),
+  ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
